@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page de détail du produit</title>
+</head>
+<body>
+
+  <div id="main-div">
+    <h2>Page de détail du produit</h2>
+
+    <!-- affiche le produit recherché correspondant à l'url -->
+    <div *ngIf="findSpecificProduit()">
+      <p><strong>ID:</strong> {{ findSpecificProduit()?.Id }}</p>
+      <p><strong>Nom:</strong> {{ findSpecificProduit()?.Nom }}</p>
+      <p><strong>Textures:</strong> {{ findSpecificProduit()?.Texture }}</p>
+      <p><strong>Grammage:</strong> {{ findSpecificProduit()?.Grammage }}</p>
+      <p><strong>Couleur:</strong> {{ findSpecificProduit()?.Couleur }}</p>
+      <!-- affiche la section formulaire ci-dessous au click -->
+      <button (click)="displayForm()">Modifier</button>
+    </div>
+
+    <!-- formulaire de modification -->
+    <div *ngIf="sectionVisible">
+      <form [formGroup]="formulaireProduit" (ngSubmit)="modifyOnSubmit()">
+        <div>
+          <label for="nom">Nom du produit</label>
+          <input id="nom" formControlName="nom">
+        </div>
+        <div>
+          <label for="texture">Texture du produit</label>
+          <input id="texture" formControlName="texture">
+        </div>
+        <div>
+          <label for="grammage">Grammage du produit</label>
+          <input id="grammage" formControlName="grammage" type="number">
+        </div>
+        <div>
+          <label for="couleur">Couleur du produit</label>
+          <input id="couleur" formControlName="couleur">
+        </div>
+        <button type="submit" [disabled]="!formulaireProduit.valid">Modifier</button>
+      </form>
+      <div *ngIf="modificationValidee">Modification prise en compte !</div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page de listing</title>
+</head>
+<body>
+
+  <div>
+    <h2>Page de listing</h2>
+    <form [formGroup]="formulaireProduit" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="nom">Nom du produit</label>
+        <input id="nom" formControlName="nom" required>
+      </div>
+      <div>
+        <label for="texture">Texture du produit</label>
+        <input id="texture" formControlName="texture">
+      </div>
+      <div>
+        <label for="grammage">Grammage du produit</label>
+        <input id="grammage" formControlName="grammage" type="number">
+      </div>
+      <div>
+        <label for="couleur">Couleur du produit</label>
+        <input id="couleur" formControlName="couleur">
+      </div>
+      <button type="submit" [disabled]="!formulaireProduit.valid">Sauvegarder</button>
+    </form>
+
+    <ul>
+      <li *ngFor="let produit of getListeProduits() | async">
+        <button (click)="goToPage('../detail-produit/' + produit.Id)">
+          <p style="color:#333;"><strong>ID:</strong> {{ produit.Id }}</p>
+          <p style="color:#333;"><strong>Nom:</strong> {{ produit.Nom }}</p>
+          <p style="color:#333;"><strong>Textures:</strong> {{ produit.Texture }}</p>
+          <p style="color:#333;"><strong>Grammage:</strong> {{ produit.Grammage }}</p>
+          <p style="color:#333;"><strong>Couleur:</strong> {{ produit.Couleur }}</p>
+        </button>
+      </li>
+      <!-- affiche un message si il n'y a aucun produit -->
+      <p *ngIf="(getListeProduits() | async)?.length === 0">
+        Il n'y a aucun produit à afficher.
+        <br>
+        Créez un produit pour le voir affiché !
+      </p>
+    </ul>
+  </div>
+
+</body>
+</html>
