@@ -5,10 +5,9 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8080:80"
-    networks:
-      - app-network
+      - "4200:80"
 
-networks:
-  app-network:
-    driver: bridge
+  # nginx:
+  #   image: nginx:alpine
+  #   ports:
+  #     - "8080:80"
