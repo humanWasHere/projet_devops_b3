@@ -60,9 +60,7 @@ jobs:
           dotnet-version: 8.0.x
           
       - name: Restore NuGet packages
-        run: |
-          cd ./Web_API-.NET 
-          dotnet restore
+        run: dotnet restore
         working-directory: ./Web_API-.NET
 
       - name: Build API
