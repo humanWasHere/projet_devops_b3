@@ -70,6 +70,7 @@ jobs:
 
       #- name: Publish API
         #run: dotnet publish --configuration Release --output ./publish
+        
       - name: Login to Docker Hub
         uses: docker/login-action@v1
         with:
@@ -84,6 +85,7 @@ jobs:
           push: true
           tags: icicabz/imageapidotnet:latest
 
+
   deploy_with_docker_compose:
     name: Deploy with Docker Compose
     runs-on: ubuntu-latest
@@ -94,10 +96,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      #- name: Install Docker
+        #uses: actions/setup-docker@v2
+        #with:
+          #docker-version: '20.10.8'  # Version de Docker à installer
       - name: Install Docker
-        uses: actions/setup-docker@v2
-        with:
-          docker-version: '20.10.8'  # Version de Docker à installer
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y docker.io
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v1
