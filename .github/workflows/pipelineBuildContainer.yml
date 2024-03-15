@@ -64,8 +64,8 @@ jobs:
           cd ./Web_API-.NET
           dotnet build --configuration Release
 
-      - name: Publish API
-        run: dotnet publish --configuration Release --output ./publish
+      #- name: Publish API
+        #run: dotnet publish --configuration Release --output ./publish
 
       - name: Build Docker image for API
         uses: docker/build-push-action@v2
