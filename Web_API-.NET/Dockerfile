@@ -27,11 +27,11 @@ COPY ["./WebApiDevSysOps.csproj", "Web_API-.NET/"]
 RUN dotnet restore "./Web_API-.NET/./WebApiDevSysOps.csproj"
 COPY . .
 WORKDIR "/src/Web_API-.NET"
-RUN dotnet build "./WebApiDevSysOps.csproj" -c Release -o /app/build
+RUN dotnet build "WebApiDevSysOps.csproj" -c Release -o /app/build
 
 # Publish the API
 FROM build AS publish
-RUN dotnet publish "./WebApiDevSysOps.csproj" -c Release -o /app/publish
+RUN dotnet publish "WebApiDevSysOps.csproj" -c Release -o /app/publish
 
 # Set up the final image
 FROM base AS final
