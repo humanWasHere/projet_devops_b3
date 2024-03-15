@@ -100,6 +100,12 @@ jobs:
         #uses: actions/setup-docker@v2
         #with:
           #docker-version: '20.10.8'  # Version de Docker à installer
+
+      - name: Remove conflicting containerd package
+        run: |
+          sudo apt-get purge -y containerd
+          sudo apt-get autoremove -y
+          
       - name: Install Docker
         run: |
           sudo apt-get update
