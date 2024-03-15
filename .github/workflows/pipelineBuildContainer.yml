@@ -60,7 +60,9 @@ jobs:
           dotnet-version: 5.0.x
 
       - name: Build API
-        run: dotnet build --configuration Release
+        run: |
+          cd ./Web_API-.NET
+          dotnet build --configuration Release
 
       - name: Publish API
         run: dotnet publish --configuration Release --output ./publish
